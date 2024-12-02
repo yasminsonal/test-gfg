@@ -1,23 +1,22 @@
 #User function Template for python3
 
 #Complete this function
-#Function to find maximum circular subarray sum.
+#Function to find maximum circular subarray su
 def circularSubarraySum(arr):
-    ##Your code here
-    total=0
-    max_sum=cur_max = float('-inf')
-    min_sum = cur_min = float('inf')
+    def kadane(arr):
+        max_ending_here = max_so_far = arr[0]
+        for x in arr[1:]:
+            max_ending_here = max(x, max_ending_here + x)
+            max_so_far = max(max_so_far, max_ending_here)
+        return max_so_far
+    max_kadane = kadane(arr)
+    total_sum = sum(arr)
+    min_kadane = kadane([-x for x in arr])
+    max_circular = total_sum + min_kadane  
+    if max_circular == 0:
+        return max_kadane
     
-    for i in arr:
-        cur_max=max(i,cur_max+i)
-        max_sum=max(max_sum,cur_max)
-        
-        cur_min=min(i, cur_min+i)
-        min_sum=min(min_sum,cur_min)
-        
-        total+=i
-        
-    return max(max_sum,total-min_sum,total)
+    return max(max_kadane, max_circular)
 
 
 #{ 
