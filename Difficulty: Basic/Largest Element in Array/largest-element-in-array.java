@@ -53,21 +53,22 @@ class GFG {
 class Solution {
     public static int largest(int[] arr) {
         // code here
+        int n=arr.length;
         int result=arr[0];
-        if(arr.length==1)
+        if(n==1)
         {
             return arr[0];
         }
-        else
+        for(int i=1;i<n;i++)
         {
-            for(int i=1;i<arr.length;i++)
+            if(arr[i]>result)
             {
-                if(arr[i]>result)
-                {
-                    result=arr[i];
-                }
+            result=arr[i];    
             }
-            return result;
+            
         }
+        return result;
+       
+    
     }
 }
