@@ -53,21 +53,19 @@ class GFG {
 class Solution {
     public ArrayList<Integer> intersectionWithDuplicates(int[] a, int[] b) {
         // code here
-        ArrayList<Integer> arr=new ArrayList<>();
-        HashSet<Integer> set=new HashSet<>();
-        for(int i:a)
-        {
-            set.add(i);
-            
+        HashMap<Integer,Integer> map=new HashMap<>();
+        ArrayList<Integer>ans=new ArrayList<>();
+        for(Integer n:a){
+            map.put(n,map.getOrDefault(n,0)+1);
         }
-        for(int i:b)
+        for(Integer n:b)
         {
-            if(set.contains(i) && !arr.contains(i))
+            if(map.containsKey(n))
             {
-                arr.add(i);
+                ans.add(n);
+                map.remove(n);
             }
         }
-        Collections.sort(arr);
-        return arr;
+        return ans;
     }
 }
