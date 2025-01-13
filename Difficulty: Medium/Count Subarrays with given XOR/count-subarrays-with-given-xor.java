@@ -28,19 +28,21 @@ public class Main {
 class Solution {
     public long subarrayXor(int arr[], int k) {
         // code here
-        HashMap<Long, Integer> mp=new HashMap<>();
-        long count=0;
-        long sum=0;
-        for(int i=0;i<arr.length;i++)
+        long ans=0;
+        HashMap<Integer, Integer> map=new HashMap<>();
+        map.put(0,1);
+        int currentXor=0;
+        
+        for(int num:arr)
         {
-            sum^=arr[i];
-            if(sum==k)
-            count++;
-            long toFind=sum^k;
-            if(mp.containsKey(toFind))
-            count+=mp.get(toFind);
-            mp.put(sum,mp.getOrDefault(sum,0)+1);
+            currentXor^=num;
+            int target=currentXor^k;
+            if(map.containsKey(target)){
+                ans+=map.get(target);
+            }
+            map.put(currentXor, map.getOrDefault(currentXor, 0)+1);
+            
         }
-        return count;
+        return ans;
     }
 }
