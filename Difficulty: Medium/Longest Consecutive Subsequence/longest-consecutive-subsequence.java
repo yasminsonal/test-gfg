@@ -30,30 +30,26 @@ class Solution {
     // Function to return length of longest subsequence of consecutive integers.
     public int longestConsecutive(int[] arr) {
         // code here
-        int maxi=0;
-        int n=arr.length;
-        int l=0;
-        int r=0;
-        int cnt=0;
-        Set<Integer> hash=new HashSet<Integer>();
-        for(int i=0;i<n;i++)
-        {
-            hash.add(arr[i]);
+        int maxSize = Integer.MIN_VALUE;
+        int size = 0;
+        int smallest = Integer.MAX_VALUE;
+        int largest = Integer.MIN_VALUE;
+        
+        HashMap<Integer, Integer> hp = new HashMap<>();
+        
+        for(int num : arr) {
+            hp.put(num, 0);
+            smallest = Math.min(smallest, num);
+            largest = Math.max(largest, num);
         }
-        Integer[] arr1=hash.toArray(new Integer[0]);
-        Arrays.sort(arr1);
-        while(r<arr1.length)
-        {
-            if(arr1[r]-arr1[l]!=r-l)
-            {
-                l++;
-            }
-            if(arr1[r]-arr1[l]==r-l)
-            {
-                maxi=Math.max(maxi,r-l);
-            }
-            r++;
+        
+        for(int i=smallest; i<=largest; i++) {
+            if(hp.containsKey(i)) size++;
+            else size = 0;
+
+            maxSize = Math.max(size, maxSize);
         }
-        return maxi+1;
+        
+        return maxSize;
     }
 }
