@@ -39,42 +39,27 @@ class GFG {
 class Solution {
     public int kthElement(int a[], int b[], int k) {
         // code here
-        int i=0;
-        int j=0;
-        int count=0;
-        int result=0;
-        while(i<a.length && j<b.length)
+        int x=a.length;
+        int y=b.length;
+        int n=x+y;
+        int[] arr=new int[n];
+        int i=0, j=0, z=0;
+        while(i<x && j<y )
         {
             if(a[i]<b[j])
             {
-                result=a[i];
-                i++;
-                
+                arr[z++]=a[i++];
             }
             else
             {
-                result = b[j];
-                j++;
+                arr[z++]=b[j++];
             }
-            count++;
-            if(count==k)return result;
         }
-        while (i<a.length)
-        {
-            result=a[i];
-            i++;
-            count++;
-            if(count==k)return result;
-            
-        }
-        while (j<b.length)
-        {
-            result=b[j];
-            j++;
-            count++;
-            if(count==k)return result;
-            
-        }
-        return -1;
+            while(i<x)
+            arr[z++]=a[i++];
+            while(j<y)
+            arr[z++]=b[j++];
+            return arr[k-1];
+        
     }
 }
