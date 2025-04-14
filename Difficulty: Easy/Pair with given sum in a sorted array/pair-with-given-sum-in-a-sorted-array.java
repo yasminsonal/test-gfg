@@ -7,27 +7,61 @@ import java.util.*;
 
 
 // } Driver Code Ends
+
 // User function Template for Java
 
 class Solution {
 
     int countPairs(int arr[], int target) {
         // Complete the function
-        HashMap<Integer, Integer> hs=new HashMap<>();
-        int ans=0;
-        for(int i=0;i<arr.length;i++)
-        {
-            int diff =target-arr[i];
-            if(hs.containsKey(arr[i]))
-            {
-                ans+=hs.get(arr[i]);
-            }
-            hs.put(diff,hs.getOrDefault(diff,0)+1);
-        }
-        return ans;
+        int ans = 0;
         
+        ArrayList<Integer> num = new ArrayList<>();
+        ArrayList<Integer> val = new ArrayList<>();
+        
+        int prev = arr[0];
+        int count = 1;
+        for(int i=1; i<arr.length; i++){
+            if(arr[i] == prev){
+                count++;
+            }    
+            else{
+                num.add(prev);
+                val.add(count);
+                prev = arr[i];
+                count = 1;
+                
+            }
+        }
+        
+        num.add(prev);
+        val.add(count);
+        
+        int left = 0, right = num.size() - 1;
+        
+        while(left < right){
+            if((num.get(left) + num.get(right)) == target){
+                ans += (val.get(left++) * val.get(right--));
+            }
+            else if((num.get(left) + num.get(right)) < target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        
+        if(target % 2 == 0){
+            if(num.get(left) == target/2){
+                int m = val.get(left);
+                ans += (int)(m * (m-1) / 2);
+            }
+        }
+        
+        return ans;
     }
 }
+
 
 
 //{ Driver Code Starts.
