@@ -5,26 +5,40 @@ import java.util.*;
 
 
 // } Driver Code Ends
+
 // User function Template for Java
 class Solution {
     int countPairs(int arr[], int target) {
         // Your code here
-        int l=0;
-        int r=(arr.length)-1;
         Arrays.sort(arr);
-        int ans=0;
-        while(l<r){
-            if((arr[l]+arr[r])<target)
+        int count =0;
+        int tempHigh = arr.length-1;
+        for(int i=0; i <= arr.length-2;i++)
+        {
+            int low = i;
+            int high = tempHigh;
+            int requiredTarget = target - arr[i];
+            while(low < high)
             {
-                ans+=(r-l);
-                l++;
+                if(arr[high] >= requiredTarget)
+                {
+                    high--;
+                }
+                else if(arr[high] < requiredTarget)
+                {
+                    if(count == 0)
+                    {
+                        tempHigh = high;
+                    }
+                    count++;
+                    high--;
+                }
             }
-            else
-            r--;
         }
-        return ans;
+        return count;
     }
 }
+
 
 //{ Driver Code Starts.
 
