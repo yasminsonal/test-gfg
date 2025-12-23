@@ -1,14 +1,11 @@
 class Solution {
     public static int nSum(int n) {
         // code here
-      
-        int sum=0;
         
-              while(n>0){
-                sum += n;
-                n--;
-            
+        int ans = 0;
+        for(int i=0;i<=n;i++){
+            ans +=i;
         }
-        return sum;
+        return ans;
     }
 }
